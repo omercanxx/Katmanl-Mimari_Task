@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Task.ViewModel.TaskViewModel>
+﻿@model IEnumerable<Task.DataAccess.Concrete.Ef.MyModel>
 @{
     ViewBag.Title = "Task";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,19 +31,20 @@
         {
             <tr id="satir_@item">
                 <td>
-                    @item.Name
+                    @item.Task.Name
                 </td>
                 <td>
-                    @item.Expression
+                    @item.Task.Expression
                 </td>
 
                 <td>
-                    @item.Status
+                    @item.Task.Status
                 </td>
                 <td>
+                    @item.Task.AspNetUsers.UserName
                 </td>
                 <td>
-
+                    @item.Task.Project.Name
                 </td>
             </tr>
         }

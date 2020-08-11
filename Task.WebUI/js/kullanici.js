@@ -50,7 +50,7 @@ function kurtar(proje_id) {
     bootbox.confirm("Are you sure want to recover?", function (result) {
         if (result) {
             $.ajax({
-                url: '/Admin/kurtar',
+                url: '/Admin/Recovery',
                 data: { id: proje_id },
                 type: 'POST',
                 success: function (cevap) {
@@ -65,7 +65,7 @@ function sil(proje_id) {
     bootbox.confirm("Are you sure want to delete?", function (result) {
         if (result) {
             $.ajax({
-                url: '/Proje/sil',
+                url: '/Project/Delete',
                 data: { id: proje_id },
                 type: 'POST',
                 success: function (cevap) {

@@ -1,4 +1,4 @@
-﻿@model List<Task.ViewModel.TaskViewModel>
+﻿@model IEnumerable<Task.DataAccess.Concrete.Ef.MyModel>
 @{
     ViewBag.Title = "ToDoTask";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -32,32 +32,33 @@
         {
             <tr id="satir_@item">
                 <td>
-                    @item.Name
+                    @item.Task.Name
                 </td>
                 <td>
-                    @item.Expression
+                    @item.Task.Expression
                 </td>
 
                 <td>
-                    @item.Status
+                    @item.Task.Status
                 </td>
                 <td>
+                    @item.Task.Project.Name
                 </td>
-                @if (item.WhyRejected != null)
+                @if (item.Task.WhyRejected != null)
                 {
                     <td>
-                        <button type="button" class="btn btn-primary" onclick="goster(@item.Id)">
+                        <button type="button" class="btn btn-primary" onclick="goster(@item.Task.Id)">
                             <span class="glyphicon glyphicon-question-sign"></span>
                         </button>
                     </td>
                 }
-                @if (item.WhyRejected == null)
+                @if (item.Task.WhyRejected == null)
                 {
                     <td>
                     </td>
                 }
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="gonder(@item.Id)">
+                    <button type="button" class="btn btn-primary" onclick="gonder(@item.Task.Id)">
                         <span class="glyphicon glyphicon-share-alt"></span>
                     </button>
                 </td>

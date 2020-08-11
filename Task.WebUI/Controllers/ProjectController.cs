@@ -10,13 +10,14 @@ using Task.ViewModel;
 
 namespace Task.WebUI.Controllers
 {
+    [Authorize(Roles = "yonetici")]
     public class ProjectController : Controller
     {
         IProject repoProject = new ProjectDal();
         // GET: Project
         public ActionResult Project()
         {
-            List<ProjectViewModel> activePrjList = repoProject.GetActiveAll();
+            List<MyModel> activePrjList = repoProject.GetActiveAll();
             return View(activePrjList);
         }
         public ActionResult Create()

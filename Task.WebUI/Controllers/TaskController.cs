@@ -22,21 +22,21 @@ namespace Task.WebUI.Controllers
         public ActionResult Task()
         {
             string id = User.Identity.GetUserId();
-            List<TaskViewModel> approvedList = repoTask.Approved().ToList();
+            List<MyModel> approvedList = repoTask.Approved().ToList();
             return View(approvedList);
         }
         [Authorize(Roles = "yonetici")]
         public ActionResult ExpectedTask()
         {
             string id = User.Identity.GetUserId();
-            List<TaskViewModel> expectedList = repoTask.Expected().ToList();
+            List<MyModel> expectedList = repoTask.Expected().ToList();
             return View(expectedList);
         }
         [Authorize(Roles = "personel")]
         public ActionResult ToDoTask()
         {
             string id = User.Identity.GetUserId();
-            List<TaskViewModel> ToDo = repoTask.ToDo(id);
+            List<MyModel> ToDo = repoTask.ToDo(id);
             return View(ToDo);
         }
         [Authorize(Roles = "yonetici")]
@@ -48,7 +48,7 @@ namespace Task.WebUI.Controllers
             List<object> pList = new List<object>();
             foreach (var item in proje)
             {
-                pList.Add(new SelectListItem { Text = item.Name, Value = Convert.ToString(item.Id) });
+                pList.Add(new SelectListItem { Text = item.Project.Name, Value = Convert.ToString(item.Project.Id) });
             }
             ViewBag.pList = pList;
 
@@ -88,6 +88,11 @@ namespace Task.WebUI.Controllers
         {
             repoTask.Reddet(id, exp);
             return RedirectToAction("ExpectedTask");
+        }
+        public string goster(int id)
+        {
+            string exp = repoTask.Goster(id);
+            return exp;
         }
     }
 }

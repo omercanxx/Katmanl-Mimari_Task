@@ -11,8 +11,8 @@ namespace Task.DataAccess.Abstract
 {
     public interface IProject : IRepository<ProjectViewModel>
     {
-        List<ProjectViewModel> GetActiveAll();
-        List<ProjectViewModel> GetPasiveAll();
+        List<MyModel> GetActiveAll();
+        List<MyModel> GetPasiveAll();
         bool Recovery(int id);
     }
 }

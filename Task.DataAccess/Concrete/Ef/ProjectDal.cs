@@ -15,41 +15,29 @@ namespace Task.DataAccess.Concrete.Ef
     {
         readonly TaskEntities db = new TaskEntities();
 
-        List<ProjectViewModel> IProject.GetActiveAll()
+        List<MyModel> IProject.GetActiveAll()
         {
-            List<ProjectViewModel> prjModel = new List<ProjectViewModel>();
-            foreach (Project prj in db.Project)
-            {
-                ProjectViewModel model = new ProjectViewModel();
-                model.Id = prj.Id;
-                model.Name = prj.Name;
-                model.Status = prj.Status;
-                model.UserId = prj.UserId;
-                model.CreatedDate = prj.CreatedDate;
-                if (prj.IsVisible == true)
-                {
-                    prjModel.Add(model);
-                }
-            }
-            return prjModel;
+            var query = from prj in db.Project
+                        join user in db.AspNetUsers on prj.UserId equals user.Id
+                        where prj.IsVisible == true
+                        select new MyModel
+                        {
+                            Project = prj,
+                            User = user
+                        };
+            return query.ToList();
         }
-        List<ProjectViewModel> IProject.GetPasiveAll()
+        List<MyModel> IProject.GetPasiveAll()
         {
-            List<ProjectViewModel> prjModel = new List<ProjectViewModel>();
-            foreach (Project prj in db.Project)
-            {
-                ProjectViewModel model = new ProjectViewModel();
-                model.Id = prj.Id;
-                model.Name = prj.Name;
-                model.Status = prj.Status;
-                model.UserId = prj.UserId;
-                model.CreatedDate = prj.CreatedDate;
-                if (prj.IsVisible == false)
-                {
-                    prjModel.Add(model);
-                }
-            }
-            return prjModel;
+            var query = from prj in db.Project
+                        join user in db.AspNetUsers on prj.UserId equals user.Id
+                        where prj.IsVisible == false
+                        select new MyModel
+                        {
+                            Project = prj,
+                            User = user
+                        };
+            return query.ToList();
         }
 
         public bool Delete(int id)
@@ -144,11 +132,6 @@ namespace Task.DataAccess.Concrete.Ef
             {
                 return false;
             }
-        }
-
-        List<ProjectViewModel> IRepository<ProjectViewModel>.GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

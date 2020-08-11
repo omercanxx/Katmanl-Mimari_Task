@@ -1,4 +1,4 @@
-﻿@model List<Task.ViewModel.ProjectViewModel>
+﻿@model List<Task.DataAccess.Concrete.Ef.MyModel>
 @{
     ViewBag.Title = "DeletedProject";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -29,22 +29,22 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr id="satir_@item.Id">
+            <tr id="satir_@item.Project.Id">
                 <td>
-                    @item.Name
+                    @item.Project.Name
                 </td>
                 <td>
-                    @item.CreatedDate
+                    @item.Project.CreatedDate
                 </td>
 
                 <td>
-                    @item.Status
+                    @item.Project.Status
                 </td>
                 <td>
-
+                    @item.Project.AspNetUsers.UserName
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="kurtar(@item.Id)">
+                    <button type="button" class="btn btn-primary" onclick="kurtar(@item.Project.Id)">
                         <span class="glyphicon glyphicon-check"></span>
                     </button>
                 </td>

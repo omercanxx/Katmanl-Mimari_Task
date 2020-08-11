@@ -13,80 +13,6 @@ namespace Task.DataAccess.Concrete.Ef
     public class TaskDal : IRepository<TaskViewModel>, ITask
     {
         readonly TaskEntities db = new TaskEntities();
-        public List<TaskViewModel> Task()
-        {
-            List<TaskViewModel> tskModel = new List<TaskViewModel>();
-            foreach (Entity.Task tsk in db.Task)
-            {
-                TaskViewModel model = new TaskViewModel();
-                model.Id = tsk.Id;
-                model.Name = tsk.Name;
-                model.Status = tsk.Status;
-                model.Expression = tsk.Expression;
-                model.UserId = tsk.UserId;
-                model.ProjectId = tsk.ProjectId;
-                model.WhyRejected = tsk.WhyRejected;
-                if (model.Status == "onaylandı")
-                {
-                    tskModel.Add(model);
-                }
-            }
-            return tskModel;
-        }
-        public List<TaskViewModel> Approved()
-        {
-            List<TaskViewModel> tskModel = new List<TaskViewModel>();
-            foreach (Entity.Task tsk in db.Task)
-            {
-                TaskViewModel model = new TaskViewModel();
-                model.Id = tsk.Id;
-                model.Name = tsk.Name;
-                model.Status = tsk.Status;
-                model.Expression = tsk.Expression;
-                model.UserId = tsk.UserId;
-                model.ProjectId = tsk.ProjectId;
-                model.WhyRejected = tsk.WhyRejected;
-                if(model.Status == "onaylandı")
-                {
-                    tskModel.Add(model);
-                }
-            }
-            return tskModel;
-        }
-
-        public bool Delete(int id)
-        {
-            Entity.Task tsk = db.Task.Find(id);
-            if (tsk == null)
-                return false;
-            else
-            {
-                db.Task.Remove(tsk);
-                db.SaveChanges();
-                return true;
-            }
-        }
-
-        public List<TaskViewModel> Expected()
-        {
-            List<TaskViewModel> tskModel = new List<TaskViewModel>();
-            foreach (Entity.Task tsk in db.Task)
-            {
-                TaskViewModel model = new TaskViewModel();
-                model.Id = tsk.Id;
-                model.Name = tsk.Name;
-                model.Status = tsk.Status;
-                model.Expression = tsk.Expression;
-                model.UserId = tsk.UserId;
-                model.ProjectId = tsk.ProjectId;
-                model.WhyRejected = tsk.WhyRejected;
-                if (model.Status == "onay bekliyor")
-                {
-                    tskModel.Add(model);
-                }
-            }
-            return tskModel;
-        }
 
         public List<TaskViewModel> GetAll()
         {
@@ -125,14 +51,73 @@ namespace Task.DataAccess.Concrete.Ef
             }
         }
 
-        public bool Gonder(int id)
+        public List<MyModel> Approved()
+        {
+            /*List<MyModel> tskModel = new List<MyModel>();
+            foreach (Entity.Task tsk in db.Task)
+            {
+                MyModel model = new MyModel();
+                model.Task.Id = tsk.Id;
+                model.Task.Name = tsk.Name;
+                model.Task.Status = tsk.Status;
+                model.Task.Expression = tsk.Expression;
+                model.Task.UserId = tsk.UserId;
+                model.Task.ProjectId = tsk.ProjectId;
+                model.Task.WhyRejected = tsk.WhyRejected;
+                if(model.Task.Status == "onaylandı")
+                {
+                    tskModel.Add(model);
+                }
+            }
+            return tskModel;*/
+            var query = from tsk in db.Task
+                        join prj in db.Project on tsk.ProjectId equals prj.Id
+                        join user in db.AspNetUsers on tsk.UserId equals user.Id
+                        where tsk.Status == "onaylandı"
+                        select new MyModel
+                        {
+                            Project = prj,
+                            Task = tsk,
+                            User = user
+                        };
+            return query.ToList();
+        }
+        public List<MyModel> ToDo(string id)
+        {
+            var query = from tsk in db.Task
+                        join prj in db.Project on tsk.ProjectId equals prj.Id
+                        join user in db.AspNetUsers on tsk.UserId equals user.Id
+                        where tsk.Status == "yapılmadı" && tsk.UserId == id
+                        select new MyModel
+                        {
+                            Project = prj,
+                            Task = tsk,
+                            User = user
+                        };
+            return query.ToList();
+        }
+        public List<MyModel> Expected()
+        {
+            var query = from tsk in db.Task
+                        join prj in db.Project on tsk.ProjectId equals prj.Id
+                        join user in db.AspNetUsers on tsk.UserId equals user.Id
+                        where tsk.Status == "onay bekliyor"
+                        select new MyModel
+                        {
+                            Project = prj,
+                            Task = tsk,
+                            User = user
+                        };
+            return query.ToList();
+        }
+        public bool Delete(int id)
         {
             Entity.Task tsk = db.Task.Find(id);
             if (tsk == null)
                 return false;
             else
             {
-                tsk.Status = "onay bekliyor";
+                db.Task.Remove(tsk);
                 db.SaveChanges();
                 return true;
             }
@@ -151,54 +136,6 @@ namespace Task.DataAccess.Concrete.Ef
             db.SaveChanges();
             return true;
         }
-
-        public bool Onayla(int id)
-        {
-            Entity.Task tsk = db.Task.Find(id);
-            if (tsk == null)
-                return false;
-            else
-            {
-                tsk.Status = "onaylandı";
-                db.SaveChanges();
-                return true;
-            }
-        }
-
-        public bool Reddet(int id,string exp)
-        {
-            Entity.Task tsk = db.Task.Find(id);
-            if (tsk == null)
-                return false;
-            else
-            {
-                tsk.Status = "yapılmadı";
-                db.SaveChanges();
-                return true;
-            }
-        }
-
-        public List<TaskViewModel> ToDo(string id)
-        {
-            List<TaskViewModel> tskModel = new List<TaskViewModel>();
-            foreach (Entity.Task tsk in db.Task)
-            {
-                TaskViewModel model = new TaskViewModel();
-                model.Id = tsk.Id;
-                model.Name = tsk.Name;
-                model.Status = tsk.Status;
-                model.Expression = tsk.Expression;
-                model.UserId = tsk.UserId;
-                model.ProjectId = tsk.ProjectId;
-                model.WhyRejected = tsk.WhyRejected;
-                if (model.Status == "yapılmadı" && model.UserId == id)
-                {
-                    tskModel.Add(model);
-                }
-            }
-            return tskModel;
-        }
-
         public bool Update(TaskViewModel model)
         {
             try
@@ -221,5 +158,53 @@ namespace Task.DataAccess.Concrete.Ef
                 return false;
             }
         }
+
+        public bool Gonder(int id)
+        {
+            Entity.Task tsk = db.Task.Find(id);
+            if (tsk == null)
+                return false;
+            else
+            {
+                tsk.Status = "onay bekliyor";
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public string Goster(int id)
+        {
+            Entity.Task tsk = db.Task.Find(id);
+            string exp = tsk.WhyRejected;
+            return exp;
+        }
+        public bool Onayla(int id)
+        {
+            Entity.Task tsk = db.Task.Find(id);
+            if (tsk == null)
+                return false;
+            else
+            {
+                tsk.Status = "onaylandı";
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool Reddet(int id,string exp)
+        {
+            Entity.Task tsk = db.Task.Find(id);
+            if (tsk == null)
+                return false;
+            else
+            {
+                tsk.Status = "yapılmadı";
+                tsk.WhyRejected = exp;
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<Task.ViewModel.TaskViewModel>
+﻿@model IEnumerable<Task.DataAccess.Concrete.Ef.MyModel>
 @{
     ViewBag.Title = "ExpectedTask";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,29 +36,29 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr id="satir_@item.Id">
+            <tr id="satir_@item.Task.Id">
                 <td>
-                    @item.Name
+                    @item.Task.Name
                 </td>
                 <td>
-                    @item.Expression
+                    @item.Task.Expression
                 </td>
                 <td>
-                    @item.Status
+                    @item.Task.Status
                 </td>
                 <td>
-                    
+                    @item.Task.Project.Name
                 </td>
                 <td>
-                    
+                    @item.Task.AspNetUsers.UserName
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="onayla(@item.Id)">
+                    <button type="button" class="btn btn-primary" onclick="onayla(@item.Task.Id)">
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="reddet(@item.Id)">
+                    <button type="button" class="btn btn-primary" onclick="reddet(@item.Task.Id)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>

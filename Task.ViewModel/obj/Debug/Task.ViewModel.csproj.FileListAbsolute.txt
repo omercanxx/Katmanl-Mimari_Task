@@ -10,3 +10,15 @@ C:\Users\omer6\source\repos\Task\Task.ViewModel\bin\Debug\Task.Entity.pdb
 C:\Users\omer6\source\repos\Task\Task.ViewModel\bin\Debug\Task.Entity.dll.config
 C:\Users\omer6\source\repos\Task\Task.ViewModel\bin\Debug\EntityFramework.xml
 C:\Users\omer6\source\repos\Task\Task.ViewModel\obj\Debug\Task.ViewModel.csproj.CopyComplete
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\Task.ViewModel.dll
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\Task.ViewModel.pdb
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\Task.Entity.dll
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\EntityFramework.dll
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\Task.Entity.pdb
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\Task.Entity.dll.config
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\bin\Debug\EntityFramework.xml
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\obj\Debug\Task.ViewModel.csprojAssemblyReference.cache
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\obj\Debug\Task.ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\obj\Debug\Task.ViewModel.csproj.CopyComplete
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\obj\Debug\Task.ViewModel.dll
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.ViewModel\obj\Debug\Task.ViewModel.pdb

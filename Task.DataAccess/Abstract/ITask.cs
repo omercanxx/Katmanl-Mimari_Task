@@ -10,11 +10,12 @@ namespace Task.DataAccess.Abstract
 {
     public interface ITask : IRepository<TaskViewModel>
     {
-        List<TaskViewModel> ToDo(string id);
-        List<TaskViewModel> Expected();
-        List<TaskViewModel> Approved();
+        List<MyModel> ToDo(string id);
+        List<MyModel> Expected();
+        List<MyModel> Approved();
         bool Onayla(int id);
         bool Reddet(int id, string exp);
         bool Gonder(int id);
+        string Goster(int id);
     }
 }
