@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="69326964d6ce45f7bb7ad2037329d00f" Name="Diagram1">
+        <EntityTypeShape EntityType="Taskv4Model.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.AspNetUsers" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.Project" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Taskv4Model.Task" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="Taskv4Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Taskv4Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Taskv4Model.FK_Project_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Taskv4Model.FK_Task_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Taskv4Model.FK_Task_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="Taskv4Model.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

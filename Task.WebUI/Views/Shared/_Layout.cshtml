@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (User.IsInRole("yonetici") || User.IsInRole("personel") || User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Caretta", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (User.IsInRole("yonetici") || User.IsInRole("personel") || User.IsInRole("admin"))
+                    {
+                        if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="~/Admin/CreateManager">Create Manager</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Admin/CreateRole">Create Role</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Admin/AssignRole">Assign Role</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Admin/DeletedProject">Deleted Project</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                        if (User.IsInRole("yonetici"))
+                        {
+                            <li>@Html.ActionLink("Create Employee", "Create", "Employee")</li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Project
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="~/Project/Project">Project List</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Project/Create">Create Project</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Task
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="~/Task/Create">Create Task</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Task/Task">Approved Task</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Task/ExpectedTask">Expected Task</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                        if (User.IsInRole("personel"))
+                        {
+                            <li>@Html.ActionLink("Task List", "ToDoTask", "Task")</li>
+
+                        }
+
+
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/js/kullanici.js"></script>
+</body>
+</html>

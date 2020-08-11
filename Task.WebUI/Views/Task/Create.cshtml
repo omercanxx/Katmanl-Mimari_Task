@@ -1,0 +1,60 @@
+﻿@model Task.ViewModel.TaskViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Task", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttribute = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Project Name</label>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.pList, "Value", "Text"))
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+                <label>Personel Mail</label>
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.UserId, new SelectList(ViewBag.userList, "Value", "Text"))
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Expression, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Expression, new { htmlAttribute = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Expression, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}

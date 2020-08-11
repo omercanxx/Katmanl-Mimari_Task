@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "CreateManager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Manager</h2>
+<br />
+
+@using (Html.BeginForm("CreateManager", "Admin", FormMethod.Post))
+{
+    <div class="row">
+        <p>
+            <div class="col-md-6">
+                <label class="control-label">Manager Email</label>
+                <input type="text" name="txtEmail" class="form-control" />
+                @ViewBag.error
+            </div>
+        </p>
+        <p>
+            <div class="col-md-6">
+                <br />
+                <button type="submit" value="Submit" class="btn btn-primary">Save</button>
+            </div>
+        </p>
+    </div>
+}

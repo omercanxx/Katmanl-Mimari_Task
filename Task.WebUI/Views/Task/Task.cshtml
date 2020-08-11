@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Task.ViewModel.TaskViewModel>
+@{
+    ViewBag.Title = "Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Approved Task</h2>
+<br />
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td>
+                <div class="col-md-2">Name</div>
+            </td>
+            <td>
+                <div class="col-md-3">Explanation</div>
+            </td>
+            <td>
+                <div class="col-md-1">Status</div>
+            </td>
+            <td>
+                <div class="col-md-5">Project</div>
+            </td>
+            <td>
+                <div class="col-md-5">From</div>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="satir_@item">
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Expression
+                </td>
+
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

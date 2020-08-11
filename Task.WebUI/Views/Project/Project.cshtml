@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Task.ViewModel.ProjectViewModel>
+@{
+    ViewBag.Title = "Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td>
+                <div class="col-md-3">Name</div>
+            </td>
+            <td>
+                <div class="col-md-3">Status</div>
+            </td>
+            <td>
+                <div class="col-md-3">Created Date</div>
+            </td>
+            <td>
+                <div class="col-md-3">Delete Project</div>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr id="satir_@item.Id">
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Status
+            </td>
+            <td>
+                @item.CreatedDate
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="sil(@item.Id)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

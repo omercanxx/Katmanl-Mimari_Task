@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/style.css" rel="stylesheet" />
+
+<h2>ADMIN</h2>
+<br />
+<div class="accordion">
+
+    <div class="accordion-section">
+        <a class="accordion-section-title">Users</a>
+        <div class="accordion-section-content">
+            <a>@Html.ActionLink("Create Manager", "CreateManager", "Admin")</a><br />
+            <a>@Html.ActionLink("Employee List", "PersonelRoles", "ManageUsers")</a><br />
+            <a>@Html.ActionLink("Administrative List", "YoneticiRoles", "ManageUsers")</a>
+        </div>
+    </div>
+    <div class="accordion-section">
+        <a class="accordion-section-title">Roles</a>
+        <div class="accordion-section-content">
+            <a>@Html.ActionLink("Create Role", "CreateRole", "Admin")</a><br />
+            <a>@Html.ActionLink("Assign Role", "AssignRole", "Admin")</a>
+        </div>
+    </div>
+</div>
+

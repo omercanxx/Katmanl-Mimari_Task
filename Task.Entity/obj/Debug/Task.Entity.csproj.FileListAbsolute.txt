@@ -1,0 +1,12 @@
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\Task.Entity.dll.config
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\Task.Entity.dll
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\Task.Entity.pdb
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\EntityFramework.dll
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\EntityFramework.xml
+C:\Users\omer6\source\repos\Task\Task.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\omer6\source\repos\Task\Task.Entity\obj\Debug\Task.Entity.csprojAssemblyReference.cache
+C:\Users\omer6\source\repos\Task\Task.Entity\obj\Debug\Task.Entity.csproj.CoreCompileInputs.cache
+C:\Users\omer6\source\repos\Task\Task.Entity\obj\Debug\Task.Entity.csproj.CopyComplete
+C:\Users\omer6\source\repos\Task\Task.Entity\obj\Debug\Task.Entity.dll
+C:\Users\omer6\source\repos\Task\Task.Entity\obj\Debug\Task.Entity.pdb

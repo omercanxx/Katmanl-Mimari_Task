@@ -1,0 +1,68 @@
+﻿@model List<Task.ViewModel.TaskViewModel>
+@{
+    ViewBag.Title = "ExpectedTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Expected Task</h2>
+<br />
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td>
+                <div class="col-md-2">Name</div>
+            </td>
+            <td>
+                <div class="col-md-3">Expression</div>
+            </td>
+            <td>
+                <div class="col-md-1">Status</div>
+            </td>
+            <td>
+                <div class="col-md-2">Project</div>
+            </td>
+            <td>
+                <div class="col-md-2">To</div>
+            </td>
+            <td>
+                <div class="col-md-2">Approve</div>
+            </td>
+            <td>
+                <div class="col-md-2">Decline</div>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="satir_@item.Id">
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Expression
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="onayla(@item.Id)">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="reddet(@item.Id)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
