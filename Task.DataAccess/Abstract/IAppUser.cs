@@ -13,5 +13,7 @@ namespace Task.DataAccess.Abstract
     {
         IEnumerable<UserRoleModel> GetPersonelAll();
         IEnumerable<UserRoleModel> GetManagerAll();
+        bool SetTrue(string username);
+
     }
 }

@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\_PasswordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -365,6 +366,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\_Password\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

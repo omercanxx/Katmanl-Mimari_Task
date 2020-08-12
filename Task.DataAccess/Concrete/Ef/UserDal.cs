@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Task.DataAccess.Abstract;
 using Task.ViewModel;
 using Task.Entity;
+using System.Data.Entity.Validation;
 
 namespace Task.DataAccess.Concrete.Ef
 {
@@ -38,7 +39,19 @@ namespace Task.DataAccess.Concrete.Ef
         {
             throw new NotImplementedException();
         }
+        public bool SetTrue(string id)
+        {
+            Entity.AspNetUsers user = db.AspNetUsers.Find(id);
+            if (user == null)
+                return false;
+            else
+            {
+                user.PasswordChanged = true;
+                db.SaveChanges();
+                return true;
+            }
 
+        }
         public IEnumerable<UserRoleModel> GetManagerAll()
         {
             var usersWithRoles = (from user in db.AspNetUsers

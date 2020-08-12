@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Task.WebUI.Controllers
 {
+    [_PasswordController]
     public class ManagerController : Controller
     {
         // GET: Manager

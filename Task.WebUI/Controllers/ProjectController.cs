@@ -10,6 +10,7 @@ using Task.ViewModel;
 
 namespace Task.WebUI.Controllers
 {
+    [_PasswordController]
     [Authorize(Roles = "yonetici")]
     public class ProjectController : Controller
     {

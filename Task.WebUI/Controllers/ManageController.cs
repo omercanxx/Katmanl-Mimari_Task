@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Task.DataAccess.Abstract;
+using Task.DataAccess.Concrete.Ef;
+using Task.ViewModel;
 using Task.WebUI.Models;
 using static Task.WebUI.EmailService;
 
@@ -16,7 +21,9 @@ namespace Task.WebUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        public bool isChanged;
+        ApplicationDbContext context = new ApplicationDbContext();
+        IAppUser repoUser = new UserDal();
         public ManageController()
         {
         }
@@ -224,9 +231,9 @@ namespace Task.WebUI.Controllers
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            isChanged = false;
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -238,13 +245,22 @@ namespace Task.WebUI.Controllers
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    isChanged = true;
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            if (isChanged)
+            {
+                setTrue();
             }
             AddErrors(result);
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
-
+        public ActionResult setTrue()
+        {
+            string id = User.Identity.GetUserId();
+            repoUser.SetTrue(id);
+            return Redirect("/Home/Index");
+        }
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()

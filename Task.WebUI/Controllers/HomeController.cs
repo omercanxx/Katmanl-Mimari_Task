@@ -10,6 +10,7 @@ using Task.ViewModel;
 
 namespace Task.WebUI.Controllers
 {
+    [_PasswordController]
     public class HomeController : Controller
     {
         IProject repoProject = new ProjectDal();

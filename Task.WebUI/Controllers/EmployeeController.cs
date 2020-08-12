@@ -12,6 +12,7 @@ using Task.WebUI.Models;
 
 namespace Task.WebUI.Controllers
 {
+    [_PasswordController]
     [Authorize(Roles = "yonetici")]
     public class EmployeeController : Controller
     {
