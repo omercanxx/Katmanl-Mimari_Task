@@ -13,6 +13,7 @@ using Task.WebUI.Models;
 namespace Task.WebUI.Controllers
 {
     [_PasswordController]
+    [HandleError]
     public class TaskController : Controller
     {
         ITask repoTask = new TaskDal();

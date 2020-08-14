@@ -14,6 +14,7 @@ namespace Task.WebUI.Controllers
 {
     [_PasswordController]
     [Authorize(Roles = "admin")]
+    [HandleError]
     public class AdminController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();

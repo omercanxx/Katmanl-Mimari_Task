@@ -12,6 +12,7 @@ namespace Task.WebUI.Controllers
 {
     [_PasswordController]
     [Authorize(Roles = "yonetici")]
+    [HandleError]
     public class ProjectController : Controller
     {
         IProject repoProject = new ProjectDal();
