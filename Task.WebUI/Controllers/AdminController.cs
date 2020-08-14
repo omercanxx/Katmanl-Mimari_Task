@@ -33,7 +33,14 @@ namespace Task.WebUI.Controllers
 
         public ActionResult Recovery(int id)
         {
-            repoProject.Recovery(id);
+            try
+            {
+                repoProject.Recovery(id);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("DeletedProject");
         }
         public ActionResult CreateManager()
@@ -44,6 +51,7 @@ namespace Task.WebUI.Controllers
         [HttpPost]
         public ActionResult CreateManager(FormCollection form)
         {
+            
             bool isAvailable = true;
             ViewBag.error = "";
             var UserManager = new Microsoft.AspNet.Identity.UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));

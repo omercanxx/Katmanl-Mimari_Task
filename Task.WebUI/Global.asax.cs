@@ -19,5 +19,13 @@ namespace Task.WebUI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+            if (ex is HttpException && ((HttpException)ex).GetHttpCode() == 404)
+            {
+                Response.Redirect("hata/404");
+            }
+        }
     }
 }

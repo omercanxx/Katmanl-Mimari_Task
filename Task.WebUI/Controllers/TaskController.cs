@@ -66,33 +66,76 @@ namespace Task.WebUI.Controllers
         [HttpPost]
         public ActionResult Create(TaskViewModel model)
         {
-            repoTask.Insert(model);
+            try
+            {
+                repoTask.Insert(model);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("Task");
         }
         public ActionResult Delete(int id)
         {
-            repoTask.Delete(id);
+            try
+            {
+                repoTask.Delete(id);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("Task");
         }
 
         public ActionResult onayla(int id)
         {
-            repoTask.Onayla(id);
+            try
+            {
+                repoTask.Onayla(id);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("Task");
         }
         public ActionResult gonder(int id)
         {
-            repoTask.Gonder(id);
+            try
+            {
+                repoTask.Gonder(id);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("ToDo");
         }
         public ActionResult reddet(int id, string exp)
         {
-            repoTask.Reddet(id, exp);
+            try
+            {
+                repoTask.Reddet(id, exp);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("ExpectedTask");
         }
         public string goster(int id)
         {
-            string exp = repoTask.Goster(id);
+            string exp;
+            try
+            {
+                exp = repoTask.Goster(id);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return exp;
         }
     }

@@ -34,12 +34,26 @@ namespace Task.WebUI.Controllers
         public ActionResult Create(ProjectViewModel model)
         {
             model.UserId = User.Identity.GetUserId();
-            repoProject.Insert(model);
+            try
+            {
+                repoProject.Insert(model);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("Project");
         }
         public ActionResult Delete(int id)
         {
-            repoProject.Delete(id);
+            try
+            {
+                repoProject.Delete(id);
+            }
+            catch
+            {
+                throw new Exception();
+            }
             return RedirectToAction("Project");
         }
     }
