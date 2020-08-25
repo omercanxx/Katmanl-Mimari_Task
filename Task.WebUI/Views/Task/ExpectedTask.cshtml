@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Expected Task</h2>
+<h2>Expecting Task</h2>
 <br />
 
 <table class="table table-responsive">
@@ -53,12 +53,12 @@
                     @item.Task.AspNetUsers.UserName
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="onayla(@item.Task.Id)">
+                    <button type="button" class="btn btn-primary" onclick="Approve(@item.Task.Id)">
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="reddet(@item.Task.Id)">
+                    <button type="button" class="btn btn-primary" onclick="Reject(@item.Task.Id)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>

@@ -20,46 +20,45 @@ namespace Task.WebUI.Controllers
         IAppUser repoUser = new UserDal();
         IProject repoProject = new ProjectDal();
         // GET: Task
-        [Authorize(Roles = "yonetici")]
+        [Authorize(Roles = "manager")]
         public ActionResult Task()
         {
             string id = User.Identity.GetUserId();
             List<MyModel> approvedList = repoTask.Approved().ToList();
             return View(approvedList);
         }
-        [Authorize(Roles = "yonetici")]
+        [Authorize(Roles = "manager")]
         public ActionResult ExpectedTask()
         {
-            string id = User.Identity.GetUserId();
             List<MyModel> expectedList = repoTask.Expected().ToList();
             return View(expectedList);
         }
-        [Authorize(Roles = "personel")]
+        [Authorize(Roles = "employee")]
         public ActionResult ToDoTask()
         {
             string id = User.Identity.GetUserId();
             List<MyModel> ToDo = repoTask.ToDo(id);
             return View(ToDo);
         }
-        [Authorize(Roles = "yonetici")]
+        [Authorize(Roles = "manager")]
         public ActionResult Create()
         {
             string id = User.Identity.GetUserId();
-            var personelList = repoUser.GetPersonelAll();
-            var proje = repoProject.GetActiveAll();
-            List<object> pList = new List<object>();
-            foreach (var item in proje)
+            var employeeList = repoUser.GetPersonelAll();
+            var project = repoProject.GetActiveAll();
+            List<object> eList = new List<object>();
+            foreach (var item in project)
             {
-                pList.Add(new SelectListItem { Text = item.Project.Name, Value = Convert.ToString(item.Project.Id) });
+                eList.Add(new SelectListItem { Text = item.Project.Name, Value = Convert.ToString(item.Project.Id) });
             }
-            ViewBag.pList = pList;
+            ViewBag.eList = eList;
 
             string name = User.Identity.GetUserName();
 
             List<object> userList = new List<object>();
-            foreach (var item in personelList)
+            foreach (var item in employeeList)
             {
-                userList.Add(new SelectListItem { Text = item.Username, Value = Convert.ToString(item.UserID) });
+                userList.Add(new SelectListItem { Text = item.UserName, Value = Convert.ToString(item.UserId) });
             }
             ViewBag.userList = userList;
             return View();
@@ -71,9 +70,9 @@ namespace Task.WebUI.Controllers
             {
                 repoTask.Insert(model);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Task", "Create"));
             }
             return RedirectToAction("Task");
         }
@@ -83,61 +82,53 @@ namespace Task.WebUI.Controllers
             {
                 repoTask.Delete(id);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Task", "Delete"));
             }
             return RedirectToAction("Task");
         }
 
-        public ActionResult onayla(int id)
+        public ActionResult Approve(int id)
         {
             try
             {
-                repoTask.Onayla(id);
+                repoTask.Approve(id);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Task", "Approve"));
             }
             return RedirectToAction("Task");
         }
-        public ActionResult gonder(int id)
+        public ActionResult Send(int id)
         {
             try
             {
-                repoTask.Gonder(id);
+                repoTask.Send(id);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Task", "Send"));
             }
             return RedirectToAction("ToDo");
         }
-        public ActionResult reddet(int id, string exp)
+        public ActionResult Reject(int id, string exp)
         {
             try
             {
-                repoTask.Reddet(id, exp);
+                repoTask.Reject(id, exp);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Task", "Reject"));
             }
             return RedirectToAction("ExpectedTask");
         }
-        public string goster(int id)
+        public string Show(int id)
         {
-            string exp;
-            try
-            {
-                exp = repoTask.Goster(id);
-            }
-            catch
-            {
-                throw new Exception();
-            }
-            return exp;
+            string explanation = repoTask.Show(id);
+            return explanation;
         }
     }
 }

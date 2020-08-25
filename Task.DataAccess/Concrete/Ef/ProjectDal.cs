@@ -17,24 +17,36 @@ namespace Task.DataAccess.Concrete.Ef
 
         List<MyModel> IProject.GetActiveAll()
         {
-            var query = from prj in db.Project
-                        join user in db.AspNetUsers on prj.UserId equals user.Id
-                        where prj.IsVisible == true
+            var query = from project in db.Project
+                        join user in db.AspNetUsers on project.UserId equals user.Id
+                        where project.IsVisible == true && project.Status == "active"
                         select new MyModel
                         {
-                            Project = prj,
+                            Project = project,
                             User = user
                         };
             return query.ToList();
         }
         List<MyModel> IProject.GetPasiveAll()
         {
-            var query = from prj in db.Project
-                        join user in db.AspNetUsers on prj.UserId equals user.Id
-                        where prj.IsVisible == false
+            var query = from project in db.Project
+                        join user in db.AspNetUsers on project.UserId equals user.Id
+                        where project.IsVisible == true && project.Status == "passive"
                         select new MyModel
                         {
-                            Project = prj,
+                            Project = project,
+                            User = user
+                        };
+            return query.ToList();
+        }
+        List<MyModel> IProject.GetDeletedProject()
+        {
+            var query = from project in db.Project
+                        join user in db.AspNetUsers on project.UserId equals user.Id
+                        where project.IsVisible == false
+                        select new MyModel
+                        {
+                            Project = project,
                             User = user
                         };
             return query.ToList();
@@ -42,24 +54,24 @@ namespace Task.DataAccess.Concrete.Ef
 
         public bool Delete(int id)
         {
-            Project prj = db.Project.Find(id);
-            if (prj == null)
+            Project project = db.Project.Find(id);
+            if (project == null)
                 return false;
             else
             {
-                prj.IsVisible = false;
+                project.IsVisible = false;
                 db.SaveChanges();
                 return true;
             }
         }
         public bool Recovery(int id)
         {
-            Project prj = db.Project.Find(id);
-            if (prj == null)
+            Project project = db.Project.Find(id);
+            if (project == null)
                 return false;
             else
             {
-                prj.IsVisible = true;
+                project.IsVisible = true;
                 db.SaveChanges();
                 return true;
             }
@@ -67,47 +79,64 @@ namespace Task.DataAccess.Concrete.Ef
 
         public List<ProjectViewModel> GetAll()
         {
-            List<ProjectViewModel> prjModel = new List<ProjectViewModel>();
-            foreach (Project prj in db.Project)
+            List<ProjectViewModel> projectModel = new List<ProjectViewModel>();
+            foreach (Project project in db.Project)
             {
                 ProjectViewModel model = new ProjectViewModel();
-                model.Id = prj.Id;
-                model.Name = prj.Name;
-                model.Status = prj.Status;
-                model.UserId = prj.UserId;
-                model.CreatedDate = prj.CreatedDate;
-                prjModel.Add(model);
+                model.Id = project.Id;
+                model.Name = project.Name;
+                model.Status = project.Status;
+                model.UserId = project.UserId;
+                model.CreatedDate = project.CreatedDate;
+                projectModel.Add(model);
 
             }
-            return prjModel;
+            return projectModel;
         }
-
+        public List<ProjectViewModel> GetProjects()
+        {
+            List<ProjectViewModel> projectModel = new List<ProjectViewModel>();
+            foreach (Project project in db.Project)
+            {
+                if (project.IsVisible == true)
+                {
+                    ProjectViewModel model = new ProjectViewModel();
+                    model.Id = project.Id;
+                    model.Name = project.Name;
+                    model.Status = project.Status;
+                    model.UserId = project.UserId;
+                    model.CreatedDate = project.CreatedDate;
+                    projectModel.Add(model);
+                }
+            }
+            return projectModel;
+        }
         public ProjectViewModel GetById(int id)
         {
-            Project prj = db.Project.Find(id);
-            if (prj == null)
+            Project project = db.Project.Find(id);
+            if (project == null)
                 return null;
             else
             {
                 ProjectViewModel model = new ProjectViewModel();
-                model.Id = prj.Id;
-                model.Name = prj.Name;
-                model.Status = prj.Status;
-                model.UserId = prj.UserId;
+                model.Id = project.Id;
+                model.Name = project.Name;
+                model.Status = project.Status;
+                model.UserId = project.UserId;
                 return model;
             }
         }
 
         public bool Insert(ProjectViewModel model)
         {
-            Project prj = new Project();
-            prj.Id = model.Id;
-            prj.Name = model.Name;
-            prj.Status = model.Status;
-            prj.UserId = model.UserId;
-            prj.IsVisible = true;
-            prj.CreatedDate = DateTime.Now;
-            db.Project.Add(prj);
+            Project project = new Project();
+            project.Id = model.Id;
+            project.Name = model.Name;
+            project.Status = model.Status;
+            project.UserId = model.UserId;
+            project.IsVisible = true;
+            project.CreatedDate = DateTime.Now;
+            db.Project.Add(project);
             db.SaveChanges();
             return true;
         }
@@ -116,14 +145,14 @@ namespace Task.DataAccess.Concrete.Ef
         {
             try
             {
-                Project prj = new Project();
-                prj.Id = model.Id;
-                prj.Name = model.Name;
-                prj.Status = model.Status;
-                prj.UserId = model.UserId;
-                prj.IsVisible = model.IsVisible;
-                prj.CreatedDate = model.CreatedDate;
-                db.Entry<Project>(prj).State =
+                Project project = new Project();
+                project.Id = model.Id;
+                project.Name = model.Name;
+                project.Status = model.Status;
+                project.UserId = model.UserId;
+                project.IsVisible = model.IsVisible;
+                project.CreatedDate = model.CreatedDate;
+                db.Entry<Project>(project).State =
                     System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return true;

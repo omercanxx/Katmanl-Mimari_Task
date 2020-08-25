@@ -66,11 +66,11 @@ namespace Task.DataAccess.Concrete.Ef
                                   }).ToList().Select(p => new UserRoleModel()
 
                                   {
-                                      UserID = p.UserId,
-                                      Username = p.Username,
+                                      UserId = p.UserId,
+                                      UserName = p.Username,
                                       Role = string.Join(",", p.RoleNames)
                                   });
-            var managerList = usersWithRoles.Where(m => m.Role == "yonetici");
+            var managerList = usersWithRoles.Where(m => m.Role == "manager");
             return managerList;
         }
 
@@ -88,11 +88,11 @@ namespace Task.DataAccess.Concrete.Ef
                                   }).ToList().Select(p => new UserRoleModel()
 
                                   {
-                                      UserID = p.UserId,
-                                      Username = p.Username,
+                                      UserId = p.UserId,
+                                      UserName = p.Username,
                                       Role = string.Join(",", p.RoleNames)
                                   });
-            var personelList = usersWithRoles.Where(m => m.Role == "personel");
+            var personelList = usersWithRoles.Where(m => m.Role == "employee");
             return personelList;
         }
 

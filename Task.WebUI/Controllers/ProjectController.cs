@@ -11,22 +11,22 @@ using Task.ViewModel;
 namespace Task.WebUI.Controllers
 {
     [_PasswordController]
-    [Authorize(Roles = "yonetici")]
+    [Authorize(Roles = "manager")]
     [HandleError]
     public class ProjectController : Controller
     {
-        IProject repoProject = new ProjectDal();
+        IProject projectDal = new ProjectDal();
         // GET: Project
         public ActionResult Project()
         {
-            List<MyModel> activePrjList = repoProject.GetActiveAll();
-            return View(activePrjList);
+            List<ProjectViewModel> projectList = projectDal.GetProjects();
+            return View(projectList);
         }
         public ActionResult Create()
         {
             List<object> status = new List<object>();
-            status.Add(new SelectListItem { Text = "Aktif", Value = "aktif" });
-            status.Add(new SelectListItem { Text = "Pasif", Value = "pasif" });
+            status.Add(new SelectListItem { Text = "Active", Value = "active" });
+            status.Add(new SelectListItem { Text = "Passive", Value = "passive" });
 
             ViewBag.status = status;
             return View();
@@ -37,11 +37,11 @@ namespace Task.WebUI.Controllers
             model.UserId = User.Identity.GetUserId();
             try
             {
-                repoProject.Insert(model);
+                projectDal.Insert(model);
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Project", "Create"));
             }
             return RedirectToAction("Project");
         }
@@ -49,11 +49,11 @@ namespace Task.WebUI.Controllers
         {
             try
             {
-                repoProject.Delete(id);
+                projectDal.Delete(id);
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Admin", "Delete"));
             }
             return RedirectToAction("Project");
         }

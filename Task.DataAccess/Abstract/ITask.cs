@@ -13,9 +13,9 @@ namespace Task.DataAccess.Abstract
         List<MyModel> ToDo(string id);
         List<MyModel> Expected();
         List<MyModel> Approved();
-        bool Onayla(int id);
-        bool Reddet(int id, string exp);
-        bool Gonder(int id);
-        string Goster(int id);
+        bool Approve(int id);
+        bool Reject(int id, string explanation);
+        bool Send(int id);
+        string Show(int id);
     }
 }

@@ -1,8 +1,8 @@
-﻿function gonder(task_id) {
+﻿function Send(task_id) {
     bootbox.confirm("Are you sure want to send?", function (result) {
         if (result) {
             $.ajax({
-                url: '/Task/gonder',
+                url: '/Task/Send',
                 data: { id: task_id },
                 type: 'POST',
                 success: function (cevap) {
@@ -13,11 +13,11 @@
         }
     });
 }
-function onayla(task_id) {
+function Approve(task_id) {
     bootbox.confirm("Are you sure want to approve?", function (result) {
         if (result) {
             $.ajax({
-                url: '/Task/onayla',
+                url: '/Task/Approve',
                 data: { id: task_id },
                 type: 'POST',
                 success: function (cevap) {
@@ -29,15 +29,15 @@ function onayla(task_id) {
     });
 }
 
-function reddet(task_id) {
-    bootbox.prompt("What is your reason for decline", function (result) {
+function Reject(task_id) {
+    bootbox.prompt("What is your reason for reject", function (result) {
         if (result) {
             $.ajax({
-                url: '/Task/reddet',
+                url: '/Task/Reject',
                 data: { id: task_id, exp: result },
                 type: 'POST',
                 success: function (cevap) {
-                    bootbox.alert("It was declined.");
+                    bootbox.alert("It was rejected.");
                     location.reload();
                 }
             })
@@ -46,8 +46,8 @@ function reddet(task_id) {
 }
 
 
-function kurtar(proje_id) {
-    bootbox.confirm("Are you sure want to recover?", function (result) {
+function Recovery(proje_id) {
+    bootbox.confirm("Are you sure want to recovery?", function (result) {
         if (result) {
             $.ajax({
                 url: '/Admin/Recovery',
@@ -61,7 +61,7 @@ function kurtar(proje_id) {
         }
     });
 }
-function sil(proje_id) {
+function Delete(proje_id) {
     bootbox.confirm("Are you sure want to delete?", function (result) {
         if (result) {
             $.ajax({
@@ -77,9 +77,9 @@ function sil(proje_id) {
     });
 }
 
-function goster(task_id) {
+function Show(task_id) {
     $.ajax({
-        url: '/Task/goster',
+        url: '/Task/Show',
         data: { id: task_id },
         type: 'POST',
         success: function (cevap) {

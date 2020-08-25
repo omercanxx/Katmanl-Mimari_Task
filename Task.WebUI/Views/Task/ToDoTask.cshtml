@@ -47,7 +47,7 @@
                 @if (item.Task.WhyRejected != null)
                 {
                     <td>
-                        <button type="button" class="btn btn-primary" onclick="goster(@item.Task.Id)">
+                        <button type="button" class="btn btn-primary" onclick="Show(@item.Task.Id)">
                             <span class="glyphicon glyphicon-question-sign"></span>
                         </button>
                     </td>
@@ -58,7 +58,7 @@
                     </td>
                 }
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="gonder(@item.Task.Id)">
+                    <button type="button" class="btn btn-primary" onclick="Send(@item.Task.Id)">
                         <span class="glyphicon glyphicon-share-alt"></span>
                     </button>
                 </td>

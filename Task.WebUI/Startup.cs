@@ -28,6 +28,11 @@ namespace Task.WebUI
                 var role = new IdentityRole("admin");
                 roleManager.Create(role);
 
+                var roleEmployee = new IdentityRole("employee");
+                roleManager.Create(roleEmployee);
+
+                var manager = new IdentityRole("manager");
+                roleManager.Create(manager);
                 //Here we create a Admin super user who will maintain the website                   
 
                 var user = new ApplicationUser();

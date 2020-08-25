@@ -13,11 +13,11 @@ using Task.WebUI.Models;
 namespace Task.WebUI.Controllers
 {
     [_PasswordController]
-    [Authorize(Roles = "yonetici")]
+    [Authorize(Roles = "manager")]
     public class EmployeeController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
-        IAppUser repoUser = new UserDal();
+        IAppUser userDal = new UserDal();
         // GET: Employee
         public ActionResult Create()
         {
@@ -29,11 +29,11 @@ namespace Task.WebUI.Controllers
             bool isAvailable = true;
             ViewBag.error = "";
             var UserManager = new Microsoft.AspNet.Identity.UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            string UserName = form["txtEmail"];
-            string email = form["txtEmail"];
-            string pwd = "Caretta.97";
+            string userName = form["textEmail"];
+            string email = form["textEmail"];
+            string password = "Caretta.97";
 
-            List<UserViewModel> uList = repoUser.GetAll();
+            List<UserViewModel> uList = userDal.GetAll();
             foreach (var item in uList)
             {
                 if (item.Email == email)
@@ -45,11 +45,11 @@ namespace Task.WebUI.Controllers
             if (isAvailable)
             {
                 var user = new ApplicationUser();
-                user.UserName = UserName;
+                user.UserName = userName;
                 user.Email = email;
                 user.PasswordChanged = false;
-                var newUser = UserManager.Create(user, pwd);
-                UserManager.AddToRole(user.Id, "personel");
+                var newUser = UserManager.Create(user, password);
+                UserManager.AddToRole(user.Id, "employee");
                 ViewBag.error = "The employee you want to add has been successfully registered.";
             }
 

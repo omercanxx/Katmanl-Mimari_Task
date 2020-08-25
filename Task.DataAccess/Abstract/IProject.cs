@@ -13,6 +13,8 @@ namespace Task.DataAccess.Abstract
     {
         List<MyModel> GetActiveAll();
         List<MyModel> GetPasiveAll();
+        List<ProjectViewModel> GetProjects();
+        List<MyModel> GetDeletedProject();
         bool Recovery(int id);
     }
 }

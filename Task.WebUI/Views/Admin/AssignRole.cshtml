@@ -10,14 +10,14 @@
 {
     <p>
         <div class="col-md-6">
-            <label class="control-label">User Name</label>
-            @Html.DropDownList("txtUserName", (IEnumerable<SelectListItem>)ViewBag.User)
+            <label class="control-label">Username</label>
+            @Html.DropDownList("textUsername", (IEnumerable<SelectListItem>)ViewBag.User)
         </div>
     </p>
     <p>
         <div class="col-md-6">
             <label class="control-label">Select Role</label>
-            @Html.DropDownList("RolesName", (IEnumerable<SelectListItem>)ViewBag.Roles)
+            @Html.DropDownList("roleName", (IEnumerable<SelectListItem>)ViewBag.Roles)
         </div>
     </p>
 

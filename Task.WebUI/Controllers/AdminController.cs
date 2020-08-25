@@ -18,8 +18,8 @@ namespace Task.WebUI.Controllers
     public class AdminController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
-        IProject repoProject = new ProjectDal();
-        IAppUser repoUser = new UserDal();
+        IProject projectDal = new ProjectDal();
+        IAppUser userDal = new UserDal();
         // GET: Admin
 
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace Task.WebUI.Controllers
         }
         public ActionResult DeletedProject()
         {
-            var model = repoProject.GetPasiveAll();
+            var model = projectDal.GetDeletedProject();
             return View(model);
         }
 
@@ -36,11 +36,11 @@ namespace Task.WebUI.Controllers
         {
             try
             {
-                repoProject.Recovery(id);
+                projectDal.Recovery(id);
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Exception();
+                return View("Error", new HandleErrorInfo(ex, "Admin", "Recovery"));
             }
             return RedirectToAction("DeletedProject");
         }
@@ -55,13 +55,13 @@ namespace Task.WebUI.Controllers
             
             bool isAvailable = true;
             ViewBag.error = "";
-            var UserManager = new Microsoft.AspNet.Identity.UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            string UserName = form["txtEmail"];
-            string email = form["txtEmail"];
-            string pwd = "Caretta.97";
+            var userManager = new Microsoft.AspNet.Identity.UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            string userName = form["textEmail"];
+            string email = form["textEmail"];
+            string password = "Caretta.97";
 
-            List<UserViewModel> uList = repoUser.GetAll();
-            foreach (var item in uList)
+            List<UserViewModel> userList = userDal.GetAll();
+            foreach (var item in userList)
             {
                 if (item.Email == email)
                 {
@@ -72,11 +72,11 @@ namespace Task.WebUI.Controllers
             if (isAvailable)
             {
                 var user = new ApplicationUser();
-                user.UserName = UserName;
+                user.UserName = userName;
                 user.Email = email;
                 user.PasswordChanged = false;
-                var newUser = UserManager.Create(user, pwd);
-                UserManager.AddToRole(user.Id, "yonetici");
+                var newUser = userManager.Create(user, password);
+                userManager.AddToRole(user.Id, "manager");
                 ViewBag.error = "The manager you want to add has been successfully registered.";
             }
 
@@ -93,17 +93,17 @@ namespace Task.WebUI.Controllers
         [HttpPost]
         public ActionResult CreateRole(FormCollection form)
         {
-            ViewBag.RoleUyari = "";
-            string RoleName = form["RoleName"];
+            ViewBag.RoleError = "";
+            string roleName = form["roleName"];
             var roleManager = new Microsoft.AspNet.Identity.RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            if (!roleManager.RoleExists(RoleName))
+            if (!roleManager.RoleExists(roleName))
             {
-                var role = new IdentityRole(RoleName);
+                var role = new IdentityRole(roleName);
                 roleManager.Create(role);
             }
             else
             {
-                ViewBag.RoleUyari = "The role you want to add is already registered.";
+                ViewBag.RoleError = "The role you want to add is already registered.";
                 return View();
             }
             return View();
@@ -119,8 +119,8 @@ namespace Task.WebUI.Controllers
         [HttpPost]
         public ActionResult AssignRole(FormCollection form)
         {
-            string username = form["txtUserName"];
-            string rolname = form["RoleName"];
+            string username = form["textUsername"];
+            string rolname = form["roleName"];
 
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(username, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
 
