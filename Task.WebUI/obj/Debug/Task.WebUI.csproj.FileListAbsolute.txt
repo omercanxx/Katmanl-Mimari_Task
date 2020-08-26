@@ -234,3 +234,4 @@ C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.WebUI\obj\Debug
 C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.WebUI\obj\Debug\Task.WebUI.csproj.CopyComplete
 C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.WebUI\obj\Debug\Task.WebUI.dll
 C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.WebUI\obj\Debug\Task.WebUI.pdb
+C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.WebUI\bin\Elmah.dll

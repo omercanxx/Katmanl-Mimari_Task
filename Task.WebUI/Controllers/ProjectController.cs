@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Elmah;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Task.WebUI.Controllers
     [HandleError]
     public class ProjectController : Controller
     {
-        IProject projectDal = new ProjectDal();
+        readonly IProject projectDal = new ProjectDal();
         // GET: Project
         public ActionResult Project()
         {
@@ -41,6 +42,7 @@ namespace Task.WebUI.Controllers
             }
             catch(Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Project", "Create"));
             }
             return RedirectToAction("Project");
@@ -53,6 +55,7 @@ namespace Task.WebUI.Controllers
             }
             catch(Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Admin", "Delete"));
             }
             return RedirectToAction("Project");

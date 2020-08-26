@@ -4,53 +4,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-<br />
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <td>
-                <div class="col-md-2">Name</div>
-            </td>
-            <td>
-                <div class="col-md-3">Expression</div>
-            </td>
-            <td>
-                <div class="col-md-1">Status</div>
-            </td>
-            <td>
-                <div class="col-md-1">From</div>
-            </td>
-            <td>
-                <div class="col-md-1">Recovery</div>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr id="satir_@item.Project.Id">
+@if (Model.Any())
+{
+    <br />
+    <table class="table table-responsive">
+        <thead>
+            <tr>
                 <td>
-                    @item.Project.Name
+                    <div class="col-md-2">Name</div>
                 </td>
                 <td>
-                    @item.Project.CreatedDate
-                </td>
-
-                <td>
-                    @item.Project.Status
+                    <div class="col-md-3">Expression</div>
                 </td>
                 <td>
-                    @item.Project.AspNetUsers.UserName
+                    <div class="col-md-1">Status</div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="Recovery(@item.Project.Id)">
-                        <span class="glyphicon glyphicon-check"></span>
-                    </button>
+                    <div class="col-md-1">From</div>
+                </td>
+                <td>
+                    <div class="col-md-1">Recovery</div>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="satir_@item.Project.Id">
+                    <td>
+                        @item.Project.Name
+                    </td>
+                    <td>
+                        @item.Project.CreatedDate
+                    </td>
 
-
+                    <td>
+                        @item.Project.Status
+                    </td>
+                    <td>
+                        @item.Project.AspNetUsers.UserName
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="Recovery(@item.Project.Id)">
+                            <span class="glyphicon glyphicon-check"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1 class="text-danger">No Deleted Project</h1>
+}

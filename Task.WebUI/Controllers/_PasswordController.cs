@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Elmah;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Task.WebUI.Controllers
 {
     public class _PasswordControllerAttribute : ActionFilterAttribute, IActionFilter
     {
-        ApplicationDbContext context = new ApplicationDbContext();
+        readonly ApplicationDbContext context = new ApplicationDbContext();
         // GET: _Password
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

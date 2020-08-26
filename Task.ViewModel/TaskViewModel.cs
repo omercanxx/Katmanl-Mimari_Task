@@ -19,5 +19,6 @@ namespace Task.ViewModel
         public string UserId { get; set; }
         public virtual AspNetUsers User { get; set; }
         public string WhyRejected { get; set; }
+        
     }
 }

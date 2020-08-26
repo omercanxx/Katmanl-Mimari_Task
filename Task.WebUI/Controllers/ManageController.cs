@@ -250,12 +250,12 @@ namespace Task.WebUI.Controllers
             }
             if (isChanged)
             {
-                setTrue();
+                SetTrue();
             }
             AddErrors(result);
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult setTrue()
+        public ActionResult SetTrue()
         {
             string id = User.Identity.GetUserId();
             repoUser.SetTrue(id);

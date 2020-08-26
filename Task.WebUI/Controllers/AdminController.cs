@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Elmah;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace Task.WebUI.Controllers
     [HandleError]
     public class AdminController : Controller
     {
-        ApplicationDbContext context = new ApplicationDbContext();
-        IProject projectDal = new ProjectDal();
-        IAppUser userDal = new UserDal();
+        readonly ApplicationDbContext context = new ApplicationDbContext();
+        readonly IProject projectDal = new ProjectDal();
+        readonly IAppUser userDal = new UserDal();
         // GET: Admin
 
         public ActionResult Index()
@@ -40,6 +41,7 @@ namespace Task.WebUI.Controllers
             }
             catch(Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Admin", "Recovery"));
             }
             return RedirectToAction("DeletedProject");

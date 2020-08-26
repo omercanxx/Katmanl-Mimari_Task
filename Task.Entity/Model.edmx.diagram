@@ -19,6 +19,7 @@
         <AssociationConnector Association="Taskv4Model.FK_Task_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Taskv4Model.FK_Task_Project" ManuallyRouted="false" />
         <AssociationConnector Association="Taskv4Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Taskv4Model.ELMAH_Error" Width="1.5" PointX="7.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

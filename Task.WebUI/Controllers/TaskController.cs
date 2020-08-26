@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Elmah;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,13 @@ namespace Task.WebUI.Controllers
     [HandleError]
     public class TaskController : Controller
     {
-        ITask repoTask = new TaskDal();
-        IAppUser repoUser = new UserDal();
-        IProject repoProject = new ProjectDal();
+        readonly ITask repoTask = new TaskDal();
+        readonly IAppUser repoUser = new UserDal();
+        readonly IProject repoProject = new ProjectDal();
         // GET: Task
         [Authorize(Roles = "manager")]
         public ActionResult Task()
         {
-            string id = User.Identity.GetUserId();
             List<MyModel> approvedList = repoTask.Approved().ToList();
             return View(approvedList);
         }
@@ -43,7 +43,6 @@ namespace Task.WebUI.Controllers
         [Authorize(Roles = "manager")]
         public ActionResult Create()
         {
-            string id = User.Identity.GetUserId();
             var employeeList = repoUser.GetPersonelAll();
             var project = repoProject.GetActiveAll();
             List<object> eList = new List<object>();
@@ -52,8 +51,6 @@ namespace Task.WebUI.Controllers
                 eList.Add(new SelectListItem { Text = item.Project.Name, Value = Convert.ToString(item.Project.Id) });
             }
             ViewBag.eList = eList;
-
-            string name = User.Identity.GetUserName();
 
             List<object> userList = new List<object>();
             foreach (var item in employeeList)
@@ -72,6 +69,7 @@ namespace Task.WebUI.Controllers
             }
             catch (Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Task", "Create"));
             }
             return RedirectToAction("Task");
@@ -84,6 +82,7 @@ namespace Task.WebUI.Controllers
             }
             catch (Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Task", "Delete"));
             }
             return RedirectToAction("Task");
@@ -97,6 +96,7 @@ namespace Task.WebUI.Controllers
             }
             catch (Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Task", "Approve"));
             }
             return RedirectToAction("Task");
@@ -109,6 +109,7 @@ namespace Task.WebUI.Controllers
             }
             catch (Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Task", "Send"));
             }
             return RedirectToAction("ToDo");
@@ -121,6 +122,7 @@ namespace Task.WebUI.Controllers
             }
             catch (Exception ex)
             {
+                ErrorLog.GetDefault(null).Log(new Error(ex));
                 return View("Error", new HandleErrorInfo(ex, "Task", "Reject"));
             }
             return RedirectToAction("ExpectedTask");

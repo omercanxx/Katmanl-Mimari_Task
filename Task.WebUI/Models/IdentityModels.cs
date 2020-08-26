@@ -24,7 +24,7 @@ namespace Task.WebUI.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("TaskEntitiesApplication", throwIfV1Schema: false)
+            : base("elmah-sqlserver", throwIfV1Schema: false)
         {
         }
 

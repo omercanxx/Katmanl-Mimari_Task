@@ -6,63 +6,70 @@
 
 <h2>Expecting Task</h2>
 <br />
-
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <td>
-                <div class="col-md-2">Name</div>
-            </td>
-            <td>
-                <div class="col-md-3">Expression</div>
-            </td>
-            <td>
-                <div class="col-md-1">Status</div>
-            </td>
-            <td>
-                <div class="col-md-2">Project</div>
-            </td>
-            <td>
-                <div class="col-md-2">To</div>
-            </td>
-            <td>
-                <div class="col-md-2">Approve</div>
-            </td>
-            <td>
-                <div class="col-md-2">Decline</div>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr id="satir_@item.Task.Id">
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
                 <td>
-                    @item.Task.Name
+                    <div class="col-md-2">Name</div>
                 </td>
                 <td>
-                    @item.Task.Expression
+                    <div class="col-md-3">Expression</div>
                 </td>
                 <td>
-                    @item.Task.Status
+                    <div class="col-md-1">Status</div>
                 </td>
                 <td>
-                    @item.Task.Project.Name
+                    <div class="col-md-2">Project</div>
                 </td>
                 <td>
-                    @item.Task.AspNetUsers.UserName
+                    <div class="col-md-2">To</div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="Approve(@item.Task.Id)">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </button>
+                    <div class="col-md-2">Approve</div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="Reject(@item.Task.Id)">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
+                    <div class="col-md-2">Decline</div>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="satir_@item.Task.Id">
+                    <td>
+                        @item.Task.Name
+                    </td>
+                    <td>
+                        @item.Task.Expression
+                    </td>
+                    <td>
+                        @item.Task.Status
+                    </td>
+                    <td>
+                        @item.Task.Project.Name
+                    </td>
+                    <td>
+                        @item.Task.AspNetUsers.UserName
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="Approve(@item.Task.Id)">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="Reject(@item.Task.Id)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+<h1 class="text-danger">No Expecting Task</h1>
+}

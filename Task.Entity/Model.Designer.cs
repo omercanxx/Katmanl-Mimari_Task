@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\omer6\source\repos\Task\Task.Entity\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\omer6\OneDrive\Belgeler\GitHub\Katmanl-Mimari_Task\Task.Entity\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

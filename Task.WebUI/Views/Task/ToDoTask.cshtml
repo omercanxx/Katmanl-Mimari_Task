@@ -3,67 +3,72 @@
     ViewBag.Title = "ToDoTask";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <td>
-                <div class="col-md-2">Name</div>
-            </td>
-            <td>
-                <div class="col-md-3">Explanation</div>
-            </td>
-            <td>
-                <div class="col-md-1">Status</div>
-            </td>
-            <td>
-                <div class="col-md-2">Project</div>
-            </td>
-            <td>
-                <div class="col-md-2">Why Rejected</div>
-            </td>
-            <td>
-                <div class="col-md-2">Send</div>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr id="satir_@item">
+@if (Model.Any())
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
                 <td>
-                    @item.Task.Name
+                    <div class="col-md-2">Name</div>
                 </td>
                 <td>
-                    @item.Task.Expression
-                </td>
-
-                <td>
-                    @item.Task.Status
+                    <div class="col-md-3">Explanation</div>
                 </td>
                 <td>
-                    @item.Task.Project.Name
+                    <div class="col-md-1">Status</div>
                 </td>
-                @if (item.Task.WhyRejected != null)
-                {
-                    <td>
-                        <button type="button" class="btn btn-primary" onclick="Show(@item.Task.Id)">
-                            <span class="glyphicon glyphicon-question-sign"></span>
-                        </button>
-                    </td>
-                }
-                @if (item.Task.WhyRejected == null)
-                {
-                    <td>
-                    </td>
-                }
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="Send(@item.Task.Id)">
-                        <span class="glyphicon glyphicon-share-alt"></span>
-                    </button>
+                    <div class="col-md-2">Project</div>
+                </td>
+                <td>
+                    <div class="col-md-2">Why Rejected</div>
+                </td>
+                <td>
+                    <div class="col-md-2">Send</div>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="satir_@item">
+                    <td>
+                        @item.Task.Name
+                    </td>
+                    <td>
+                        @item.Task.Expression
+                    </td>
 
+                    <td>
+                        @item.Task.Status
+                    </td>
+                    <td>
+                        @item.Task.Project.Name
+                    </td>
+                    @if (item.Task.WhyRejected != null)
+                    {
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="Show(@item.Task.Id)">
+                                <span class="glyphicon glyphicon-question-sign"></span>
+                            </button>
+                        </td>
+                    }
+                    @if (item.Task.WhyRejected == null)
+                    {
+                        <td>
+                        </td>
+                    }
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="Send(@item.Task.Id)">
+                            <span class="glyphicon glyphicon-share-alt"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+<h1 class="text-danger">No TODO Task</h1>
+}

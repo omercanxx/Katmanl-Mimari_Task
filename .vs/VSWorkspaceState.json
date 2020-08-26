@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Task.WebUI",
-    "\\Task.WebUI\\Controllers",
-    "\\Task.WebUI\\Views"
+    "\\Task.WebUI"
   ],
   "SelectedNode": "\\Task.sln",
   "PreviewInSolutionExplorer": false

@@ -3,46 +3,51 @@
     ViewBag.Title = "Project";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<br />
-<br />
-<table class="table table-responsive">
-    <thead>
-        <tr>
-            <td>
-                <div class="col-md-3">Name</div>
-            </td>
-            <td>
-                <div class="col-md-3">Status</div>
-            </td>
-            <td>
-                <div class="col-md-3">Created Date</div>
-            </td>
-            <td>
-                <div class="col-md-3">Delete Project</div>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
-            <tr id="satir_@item.Id">
+@if (Model.Any())
+{
+    <br />
+    <table class="table table-responsive">
+        <thead>
+            <tr>
                 <td>
-                    @item.Name
+                    <div class="col-md-3">Name</div>
                 </td>
                 <td>
-                    @item.Status
+                    <div class="col-md-3">Status</div>
                 </td>
                 <td>
-                    @item.CreatedDate
+                    <div class="col-md-3">Created Date</div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="Delete(@item.Id)">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>
+                    <div class="col-md-3">Delete Project</div>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr id="satir_@item.Id">
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Status
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="Delete(@item.Id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+<h1 class="text-danger">No Active Project</h1>
+}
